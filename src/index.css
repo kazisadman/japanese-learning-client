@@ -3,3 +3,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#navbar a.active {
+  color: #4b8d40;
+  background-color: white;
+  border-bottom: #4b8d40 2px solid;
+  border-radius: 0;
+}
+
+#navbar a:hover {
+  background-color: white;
+  color: #4b8d40;
+}
+
