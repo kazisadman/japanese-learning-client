@@ -6,8 +6,16 @@ import Paginarion from "../components/Paginarion";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 
+type TData = {
+  _id: string;
+  word: string;
+  pronunciation: string;
+  when_to_say: string;
+  lesson_no: number;
+};
+
 const Vocabulary = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<TData[]>([]);
   const { lesson_no } = useParams();
 
   const role = useSelector((state: RootState) => state.auth.role);

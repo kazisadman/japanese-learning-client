@@ -36,7 +36,7 @@ const AddLesson = () => {
     if (role !== "admin") {
       navigate("/");
     }
-  }, []);
+  }, [navigate,role]);
   return (
     <div>
       <div className="hero min-h-screen ">
