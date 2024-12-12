@@ -1,7 +1,14 @@
+import { useEffect } from "react";
 import axiosInstance from "../../utils/axiosInstance";
+import { useNavigate } from "react-router";
+import { RootState } from "../../app/store";
+import { useSelector } from "react-redux";
 
 const AddLesson = () => {
-  const addLesson = (e) => {
+  const navigate = useNavigate();
+  const role = useSelector((state: RootState) => state.auth.role);
+
+  const addLesson = (e: React.FocusEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.target;
 
@@ -25,6 +32,11 @@ const AddLesson = () => {
       })
       .catch((err) => console.error(err));
   };
+  useEffect(() => {
+    if (role !== "admin") {
+      navigate("/");
+    }
+  }, []);
   return (
     <div>
       <div className="hero min-h-screen ">

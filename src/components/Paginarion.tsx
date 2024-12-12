@@ -14,7 +14,7 @@ const Paginarion: React.FC<TData> = ({
   setCurrentPage,
 }) => {
   const [showConfetti, setShowConfetti] = useState(false);
-  const { width } = window.innerWidth;
+  const width = window.innerWidth;
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
 

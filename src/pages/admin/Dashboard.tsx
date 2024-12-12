@@ -1,5 +1,8 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { IoMdMenu } from "react-icons/io";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
+import { useEffect } from "react";
 
 const Dashboard = () => {
   const sideBarLinks = (
@@ -11,19 +14,29 @@ const Dashboard = () => {
         <Link to={"/dashboard/add-lesson"}>Add Lessons</Link>
       </li>
       <li className="text-lg">
-        <Link to={"/lessons"}> Add Vocabularies</Link>
+        <Link to={"/dashboard/add-vocabulary"}> Add Vocabularies</Link>
       </li>
       <li className="text-lg">
-        <Link to={"/lessons"}>Users</Link>
+        <Link to={"/dashboard/users"}>Users</Link>
       </li>
       <li className="text-lg">
-        <Link to={"/lessons"}>Manage Lesson</Link>
+        <Link to={"/dashboard/manage-lesson"}>Manage Lesson</Link>
       </li>
       <li className="text-lg">
-        <Link to={"/lessons"}>Manage Vocabulary</Link>
+        <Link to={"/dashboard/manage-vocabulary"}>Manage Vocabulary</Link>
       </li>
     </>
   );
+
+  const role = useSelector((state: RootState) => state.auth.role);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (role !== "admin") {
+      navigate("/");
+    }
+  }, [navigate, role]);
 
   return (
     <div className="font-outFit max-w-[1440px] mx-auto ">

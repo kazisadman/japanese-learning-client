@@ -19,7 +19,7 @@ const Home = () => {
         if (role === "user") {
           navigate("/lessons");
         } else if (role === "admin") {
-          navigate("/deshboard");
+          navigate("/dashboard/lessons");
         } else {
           navigate("/login");
         }

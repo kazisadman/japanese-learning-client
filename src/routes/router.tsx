@@ -8,6 +8,10 @@ import Vocabulary from "../pages/Vocabulary";
 import Dashboard from "../pages/admin/Dashboard";
 import AdminLessons from "../pages/admin/Lessons";
 import AddLesson from "../pages/admin/AddLesson";
+import AddVocabulary from "../pages/admin/AddVocabulary";
+import ManageUser from "../pages/admin/ManageUser";
+import ManageLesson from "../pages/admin/ManageLesson";
+import ManageVocabulary from "../pages/admin/ManageVocabulary";
 
 const router = createBrowserRouter([
   {
@@ -29,9 +33,25 @@ const router = createBrowserRouter([
         element: <AdminLessons></AdminLessons>,
       },
       {
-        path:'/dashboard/add-lesson',
-        element:<AddLesson></AddLesson>
-      }
+        path: "/dashboard/add-lesson",
+        element: <AddLesson></AddLesson>,
+      },
+      {
+        path: "/dashboard/add-vocabulary",
+        element: <AddVocabulary></AddVocabulary>,
+      },
+      {
+        path: "/dashboard/users",
+        element: <ManageUser></ManageUser>,
+      },
+      {
+        path: "/dashboard/manage-lesson",
+        element: <ManageLesson></ManageLesson>,
+      },
+      {
+        path: "/dashboard/manage-vocabulary",
+        element: <ManageVocabulary></ManageVocabulary>,
+      },
     ],
   },
   {

@@ -14,7 +14,7 @@ export type TData = {
 
 const Lessons = () => {
   const [data, setData] = useState<TData[]>([]);
-
+console.log(data)
   const role = useSelector((state: RootState) => state.auth.role);
 
   const navigate = useNavigate();

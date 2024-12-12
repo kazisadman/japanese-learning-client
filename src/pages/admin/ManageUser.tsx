@@ -1,18 +1,19 @@
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import axiosInstance from "../../utils/axiosInstance";
 
 type TData = {
   _id: string;
   name: string;
-  number: number;
-  word_count: number;
+  email: string;
+  role: string;
 };
 
-const Lessons = () => {
+const ManageUser = () => {
   const [data, setData] = useState<TData[]>([]);
+
   const role = useSelector((state: RootState) => state.auth.role);
 
   const navigate = useNavigate();
@@ -22,10 +23,22 @@ const Lessons = () => {
       navigate("/");
     }
     axiosInstance
-      .get("/lesson/")
+      .get("/")
       .then((data) => setData(data.data.data))
       .catch((err) => console.log(err));
   }, [navigate, role]);
+
+  const handleAdmin = (_id: string) => {
+    axiosInstance
+      .patch(`/${_id}`)
+      .then(() => {
+        axiosInstance
+          .get("/")
+          .then((data) => setData(data.data.data))
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div>
@@ -36,18 +49,23 @@ const Lessons = () => {
             <tr>
               <th></th>
               <th>Name</th>
-              <th>Word Count</th>
-              <th>Lesson No</th>
+              <th>Email</th>
+              <th>Role</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => (
+            {data?.map((item, index) => (
               <tr key={item._id}>
                 <th>{index + 1}</th>
                 <td>{item.name}</td>
-                <td>{item.word_count}</td>
-                <td>{item.number}</td>
+                <td>{item.email}</td>
+                <td>{item.role}</td>
+                <td>
+                  <button className="btn" onClick={() => handleAdmin(item._id)}>
+                    {item.role === "user" ? "Admin" : "User"}
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -57,4 +75,4 @@ const Lessons = () => {
   );
 };
 
-export default Lessons;
+export default ManageUser;
