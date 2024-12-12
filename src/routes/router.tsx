@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Lessons from "../pages/Lessons";
+import Vocabulary from "../pages/Vocabulary";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path:'/lessons',
     element:<Lessons></Lessons>
+  },
+  {
+    path:'/lessons/:lesson_no',
+    element:<Vocabulary></Vocabulary>
   },
   {
     path: "/login",
