@@ -20,9 +20,9 @@ const Lessons = () => {
   }, []);
 
   return (
-    <div className="font-outFit max-w-[1440px] mx-auto">
+    <div className="font-outFit max-w-[1440px] mx-auto ">
       <Navbar></Navbar>
-      <div className="grid grid-cols-4 gap-8 items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 place-items-center">
         {data?.map((item) => (
           <LessonCard key={item?._id} data={item}></LessonCard>
         ))}
