@@ -44,8 +44,8 @@ const Vocabulary = () => {
     <div className="font-outFit max-w-[1440px] mx-auto">
       <div className="flex justify-center items-center h-screen">
         <div className="flex flex-col gap-3 items-center">
-          {cureentPosts?.map((item) => (
-            <VocabularyCard key={item?._id} data={item}></VocabularyCard>
+          {cureentPosts?.map((item,index) => (
+            <VocabularyCard key={index} data={item}></VocabularyCard>
           ))}
 
           <Paginarion
