@@ -14,7 +14,7 @@ const Home = () => {
       .then((data) => {
         const { role, name, email, id, image } = data.data.data;
 
-        dispatch(login({email, image, name, role, id}));
+        dispatch(login({ email, image, name, role, id }));
 
         if (role === "user") {
           navigate("/lessons");
@@ -25,7 +25,7 @@ const Home = () => {
         }
       })
       .catch((err) => console.log(err));
-  }, [navigate,dispatch]);
+  }, [navigate, dispatch]);
 
   return <div></div>;
 };

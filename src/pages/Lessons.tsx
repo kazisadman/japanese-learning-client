@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import axiosInstance from "../utils/axiosInstance";
 import LessonCard from "../components/LessonCard";
+import { useSelector } from "react-redux";
+import { RootState } from "../app/store";
+import { useNavigate } from "react-router-dom";
 
 export type TData = {
   _id: string;
@@ -12,12 +15,19 @@ export type TData = {
 const Lessons = () => {
   const [data, setData] = useState<TData[]>([]);
 
+  const role = useSelector((state: RootState) => state.auth.role);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
+    if (role !== "user") {
+      navigate("/");
+    }
     axiosInstance
       .get("/lesson")
       .then((data) => setData(data.data.data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [navigate, role]);
 
   return (
     <div className="font-outFit max-w-[1440px] mx-auto ">

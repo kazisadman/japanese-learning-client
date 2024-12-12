@@ -2,8 +2,19 @@ import { useState } from "react";
 import ReactConfetti from "react-confetti";
 import { useNavigate } from "react-router-dom";
 
-const Paginarion = ({ totalPosts, postsPerPage, setCurrentPage }) => {
+type TData = {
+  totalPosts: number;
+  postsPerPage: number;
+  setCurrentPage: (page: number) => void;
+};
+
+const Paginarion: React.FC<TData> = ({
+  totalPosts,
+  postsPerPage,
+  setCurrentPage,
+}) => {
   const [showConfetti, setShowConfetti] = useState(false);
+  const { width } = window.innerWidth;
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
@@ -33,27 +44,29 @@ const Paginarion = ({ totalPosts, postsPerPage, setCurrentPage }) => {
   };
 
   return (
-    <div className="flex items-center gap-7">
-      {showConfetti && <ReactConfetti></ReactConfetti>}
-      <button
-        id="previousButton"
-        className={`btn ${page === 1 ? "btn-disabled" : ""}`}
-        onClick={decreamentPageNumber}
-      >
-        Previous
-      </button>
-      {page === totalPages && (
-        <button className="btn" onClick={completeBtn}>
-          Complete
+    <div>
+      {showConfetti && <ReactConfetti width={width}></ReactConfetti>}
+      <div className="flex items-center gap-7">
+        <button
+          id="previousButton"
+          className={`btn ${page === 1 ? "btn-disabled" : ""}`}
+          onClick={decreamentPageNumber}
+        >
+          Previous
         </button>
-      )}
-      <button
-        id="nextButton"
-        className={`btn ${page === totalPages ? "btn-disabled" : ""}`}
-        onClick={increamentPageNumber}
-      >
-        Next
-      </button>
+        {page === totalPages && (
+          <button className="btn" onClick={completeBtn}>
+            Complete
+          </button>
+        )}
+        <button
+          id="nextButton"
+          className={`btn ${page === totalPages ? "btn-disabled" : ""}`}
+          onClick={increamentPageNumber}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

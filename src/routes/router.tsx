@@ -5,6 +5,9 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Lessons from "../pages/Lessons";
 import Vocabulary from "../pages/Vocabulary";
+import Dashboard from "../pages/admin/Dashboard";
+import AdminLessons from "../pages/admin/Lessons";
+import AddLesson from "../pages/admin/AddLesson";
 
 const router = createBrowserRouter([
   {
@@ -18,12 +21,26 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path:'/lessons',
-    element:<Lessons></Lessons>
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "/dashboard/lessons",
+        element: <AdminLessons></AdminLessons>,
+      },
+      {
+        path:'/dashboard/add-lesson',
+        element:<AddLesson></AddLesson>
+      }
+    ],
   },
   {
-    path:'/lessons/:lesson_no',
-    element:<Vocabulary></Vocabulary>
+    path: "/lessons",
+    element: <Lessons></Lessons>,
+  },
+  {
+    path: "/lessons/:lesson_no",
+    element: <Vocabulary></Vocabulary>,
   },
   {
     path: "/login",

@@ -1,14 +1,16 @@
 import { useDispatch } from "react-redux";
 import axiosInstance from "./axiosInstance";
 import { login } from "../app/features/authSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type AuthProviderProps = {
-  children: React.ReactNode; 
+  children: React.ReactNode;
 };
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     axiosInstance
       .get("/check-auth")
@@ -17,9 +19,20 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
         dispatch(login({ email, image, name, role, id }));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
   }, [dispatch]);
-
+  
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="text-center">
+          <span className="loading loading-spinner loading-lg"></span>
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
   return children;
 };
 

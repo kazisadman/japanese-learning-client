@@ -1,9 +1,19 @@
-const VocabularyCard = ({ data }) => {
+type TData = {
+  word: string;
+  pronunciation: string;
+  when_to_say: string;
+};
+
+type TResponse = {
+  data: TData;
+};
+
+const VocabularyCard: React.FC<TResponse> = ({ data }) => {
   const { word, pronunciation, when_to_say } = data;
 
   const handlePronunciation = () => {
     const value = new SpeechSynthesisUtterance(word);
-    value.lang = 'ja-JP'
+    value.lang = "ja-JP";
     window.speechSynthesis.speak(value);
   };
   return (
