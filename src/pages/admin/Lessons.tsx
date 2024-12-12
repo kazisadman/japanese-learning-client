@@ -22,7 +22,7 @@ const Lessons = () => {
       navigate("/");
     }
     axiosInstance
-      .get("/lesson/")
+      .get("/lesson/admin/")
       .then((data) => setData(data.data.data))
       .catch((err) => console.log(err));
   }, [navigate, role]);

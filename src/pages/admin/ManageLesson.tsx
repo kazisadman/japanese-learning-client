@@ -22,7 +22,7 @@ const ManageLesson = () => {
       navigate("/");
     }
     axiosInstance
-      .get("/lesson/")
+      .get("/lesson/admin/")
       .then((data) => setData(data.data.data))
       .catch((err) => console.log(err));
   }, [navigate, role]);
@@ -32,16 +32,16 @@ const ManageLesson = () => {
       .delete(`/lesson/${_id}`)
       .then(() => {
         axiosInstance
-          .get("/lesson/")
+          .get("/lesson/admin/")
           .then((data) => setData(data.data.data))
           .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
   };
 
-  const updateLesson = (e: React.FocusEvent<HTMLFormElement>, _id: string) => {
+  const updateLesson = (e: React.FormEvent<HTMLFormElement>, _id: string) => {
     e.preventDefault();
-    const form = e.target;
+    const form = e.target as HTMLFormElement;
 
     const name = form.Lesson_Title.value;
     const number = form.Lesson_Number.value;
@@ -55,7 +55,7 @@ const ManageLesson = () => {
       .patch(`/lesson/${_id}`, data)
       .then(() => {
         axiosInstance
-          .get("/lesson/")
+          .get("/lesson/admin/")
           .then((data) => setData(data.data.data))
           .catch((err) => console.log(err));
 
@@ -95,7 +95,11 @@ const ManageLesson = () => {
                   <button
                     className="btn"
                     onClick={() =>
-                      document.getElementById("my_modal_4").showModal()
+                      (
+                        document.getElementById(
+                          "my_modal_4"
+                        ) as HTMLDialogElement
+                      ).showModal()
                     }
                   >
                     Update

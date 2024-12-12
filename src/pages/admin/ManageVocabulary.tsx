@@ -43,11 +43,11 @@ const ManageVocabulary = () => {
   const email = useSelector((state: RootState) => state.auth.email);
 
   const updateVocabulary = (
-    e: React.FocusEvent<HTMLFormElement>,
+    e: React.FormEvent<HTMLFormElement>,
     _id: string
   ) => {
     e.preventDefault();
-    const form = e.target;
+    const form = e.target as HTMLFormElement;
 
     const word = form.Word.value;
     const pronunciation = form.Pronunciation.value;
@@ -109,7 +109,9 @@ const ManageVocabulary = () => {
                   <button
                     className="btn"
                     onClick={() =>
-                      document.getElementById("my_modal_1").showModal()
+                      (
+                        document.getElementById("my_modal_1") as HTMLFormElement
+                      ).showModal()
                     }
                   >
                     Update

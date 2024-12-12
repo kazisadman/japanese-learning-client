@@ -5,6 +5,7 @@ import LessonCard from "../components/LessonCard";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 export type TData = {
   _id: string;
@@ -14,7 +15,7 @@ export type TData = {
 
 const Lessons = () => {
   const [data, setData] = useState<TData[]>([]);
-console.log(data)
+  console.log(data);
   const role = useSelector((state: RootState) => state.auth.role);
 
   const navigate = useNavigate();
@@ -30,13 +31,14 @@ console.log(data)
   }, [navigate, role]);
 
   return (
-    <div className="font-outFit max-w-[1440px] mx-auto ">
+    <div className="font-outFit max-w-[1440px] mx-auto">
       <Navbar></Navbar>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 place-items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 place-items-center my-7">
         {data?.map((item) => (
           <LessonCard key={item?._id} data={item}></LessonCard>
         ))}
       </div>
+      <Footer></Footer>
     </div>
   );
 };

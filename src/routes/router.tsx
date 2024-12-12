@@ -12,6 +12,7 @@ import AddVocabulary from "../pages/admin/AddVocabulary";
 import ManageUser from "../pages/admin/ManageUser";
 import ManageLesson from "../pages/admin/ManageLesson";
 import ManageVocabulary from "../pages/admin/ManageVocabulary";
+import Tutorial from "../pages/Tutorial";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
   {
     path: "/lessons",
     element: <Lessons></Lessons>,
+  },
+  {
+    path: "/tutorial",
+    element: <Tutorial></Tutorial>,
   },
   {
     path: "/lessons/:lesson_no",
