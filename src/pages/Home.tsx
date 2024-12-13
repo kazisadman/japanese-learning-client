@@ -1,31 +1,21 @@
-import { useNavigate } from "react-router-dom";
-import axiosInstance from "../utils/axiosInstance";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { login } from "../app/features/authSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../app/store";
 
 const Home = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const role = useSelector((state: RootState) => state.auth.role);
 
   useEffect(() => {
-    axiosInstance
-      .get("/check-auth")
-      .then((data) => {
-        const { role, name, email, id, image } = data.data.data;
+    if (role === "user") {
+      location.replace("/lessons");
+    } else if (role === "admin") {
+      location.replace("/dashboard/lessons");
+    }
 
-        dispatch(login({ email, image, name, role, id }));
-
-        if (role === "user") {
-          navigate("/lessons");
-        } else if (role === "admin") {
-          navigate("/dashboard/lessons");
-        } else {
-          navigate("/login");
-        }
-      })
-      .catch((err) => console.log(err));
-  }, [navigate, dispatch]);
+    if (role === "") {
+      location.replace("/login");
+    }
+  }, [role]);
 
   return <div></div>;
 };

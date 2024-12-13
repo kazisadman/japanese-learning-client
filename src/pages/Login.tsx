@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
 
 const Login = () => {
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
   const handleLogin = (e: React.FocusEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,7 +26,7 @@ const Login = () => {
           },
         })
         .then(() => {
-          navigate("/");
+          location.replace("/");
         })
         .catch((err) => {
           if (err.response.status === 404) {

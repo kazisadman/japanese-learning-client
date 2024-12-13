@@ -1,11 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import axiosInstance from "../utils/axiosInstance";
 
 const Register = () => {
   const [error, setError] = useState("");
-    const navigate = useNavigate();
 
   const handleRegister = (e: React.FocusEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,12 +39,10 @@ const Register = () => {
             password,
             image: imageUrl,
           };
-          console.log(userData);
           axiosInstance
             .post(`/register`, userData)
-            .then((data) => {
-                navigate("/");
-              console.log(data);
+            .then(() => {
+          location.replace("/");
             })
             .catch((err) => {
               if (err.response.status === 409) {
